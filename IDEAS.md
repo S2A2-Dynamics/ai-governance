@@ -4,6 +4,7 @@ Ver también `docs/ROADMAP.md` (diseño conceptual de mayor alcance, ej. TokenPu
 
 ## Pendientes de evaluar
 
+- 🔍 (18-sep-2026) Ejecutar T-03: CI mínimo de lint y typecheck tras completar el scaffold.
 - (18-sep-2026) Integración TokenPulse como fuente automática de Evidence — ver
   `docs/ROADMAP.md`. Estado: conceptual, sin ticket.
 - (18-sep-2026) Exportación de informe de auditoría en PDF para EU AI Act. Estado: backlog.

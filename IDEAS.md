@@ -4,7 +4,8 @@ Ver también `docs/ROADMAP.md` (diseño conceptual de mayor alcance, ej. TokenPu
 
 ## Pendientes de evaluar
 
-- 🔍 (18-sep-2026) Ejecutar T-03: CI mínimo de lint y typecheck tras completar el scaffold.
+- ✅ (18-sep-2026) T-03 completado: CI con lint, typecheck, build y validación Prisma.
+- 🔍 (18-sep-2026) Ejecutar T-05: endpoints AISystem con validación Zod.
 - (18-sep-2026) Integración TokenPulse como fuente automática de Evidence — ver
   `docs/ROADMAP.md`. Estado: conceptual, sin ticket.
 - (18-sep-2026) Exportación de informe de auditoría en PDF para EU AI Act. Estado: backlog.

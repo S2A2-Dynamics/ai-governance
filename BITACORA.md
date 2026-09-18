@@ -2,4 +2,4 @@
 
 Índice mensual del historial de desarrollo.
 
-- [2026-09](BITACORA-2026-09.md) — arranque, repositorio público y scaffold T-01/T-02.
+- [2026-09](BITACORA-2026-09.md) — arranque, repositorio público, scaffold, CI y schema T-01/T-04.

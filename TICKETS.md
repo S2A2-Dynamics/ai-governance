@@ -27,7 +27,7 @@
 ### T-03 — CI mínimo (lint + typecheck)
 **Contexto**: proteger `main` de romper build en repo nuevo.
 **Criterios de aceptación**
-- [ ] GitHub Action que corre `tsc --noEmit` y lint en backend y frontend en cada push
+- [x] GitHub Action que corre `tsc --noEmit` y lint en backend y frontend en cada push
 **Estimación**: XS
 
 ## Epic: Backend
@@ -35,10 +35,10 @@
 ### T-04 — Schema Prisma completo (PRD §8)
 **Contexto**: Organization, AISystem, Risk, Control, Evidence, Incident, IsoDomain + relaciones.
 **Criterios de aceptación**
-- [ ] Todas las entidades de PRD §8 modeladas con `organizationId` en cada una
-- [ ] Sin tipos nativos de un solo motor (`@db.*`, arrays Postgres) — contrato SDD PRD §15
-- [ ] Migración inicial aplicada, `npx prisma studio` muestra las tablas vacías
-- [ ] Seed de los 12 dominios ISO/IEC 42001 como catálogo fijo (`IsoDomain`)
+- [x] Todas las entidades de PRD §8 modeladas con `organizationId` en cada una
+- [x] Sin tipos nativos de un solo motor (`@db.*`, arrays Postgres) — contrato SDD PRD §15
+- [x] Migración inicial aplicada; tablas operativas vacías y catálogos visibles en `npx prisma studio`
+- [x] Seed de las 9 áreas de control A.2–A.10 de ISO/IEC 42001 (`IsoDomain`)
 **Restricciones / Notas técnicas**: contrato SDD — "SI se migra a Postgres → ENTONCES solo cambia provider/url".
 **Estimación**: M
 
@@ -68,7 +68,7 @@
 **Contexto**: contrato SDD más sensible del proyecto — evitar datos inventados (lección
 `bitacora_sesion_previa_puede_contener_datos_inventados`).
 **Criterios de aceptación**
-- [ ] `GET /api/dashboard/maturity` devuelve score 0-100 por cada uno de los 12 dominios ISO
+- [ ] `GET /api/dashboard/maturity` devuelve score 0-100 por cada una de las 9 áreas del Anexo A
 - [ ] Un dominio sin ningún Control con Evidence registrada devuelve **0**, nunca un valor sintético
 - [ ] Fórmula documentada en código (comentario corto) : cobertura = controles-con-evidencia / total-controles-del-dominio
 - [ ] Test unitario: dominio vacío → 0; dominio con 1 control sin evidencia → 0; con evidencia → >0
@@ -97,7 +97,7 @@
 
 ### T-12 — Dashboard de madurez (US-06)
 **Criterios de aceptación**
-- [ ] Recharts: gráfico de 12 dominios ISO con score 0-100
+- [ ] Recharts: gráfico de las 9 áreas del Anexo A con score 0-100
 - [ ] Dominio en 0 se muestra visualmente distinto a "sin datos" vs "score bajo real" (evitar
   que un 0 por falta de evidencia se lea como "cumplimiento pésimo" sin contexto)
 **Estimación**: S

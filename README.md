@@ -39,11 +39,18 @@ cp .env.example .env
 npm run prisma:generate
 ```
 
-La primera migración y el esquema completo se implementarán en T-04.
+Para crear o actualizar la base local y cargar la organización junto con las 9 áreas de
+control del Anexo A de ISO/IEC 42001:
+
+```bash
+cd backend
+npm run db:migrate -- --name init
+npm run db:seed
+```
 
 ## Verificación
 
 ```bash
-cd backend && npm run typecheck
-cd frontend && npm run typecheck && npm run build
+cd backend && npm run lint && npm run typecheck
+cd frontend && npm run lint && npm run typecheck && npm run build
 ```

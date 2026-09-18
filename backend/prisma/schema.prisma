@@ -7,4 +7,104 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Las entidades del dominio y la primera migración se incorporarán en T-04.
+model Organization {
+  id         String      @id
+  name       String
+  aiSystems  AISystem[]
+  risks      Risk[]
+  controls   Control[]
+  evidence   Evidence[]
+  incidents  Incident[]
+  isoDomains IsoDomain[]
+}
+
+model AISystem {
+  id             String       @id @default(cuid())
+  organizationId String
+  name           String
+  purpose        String
+  provider       String
+  gcpProject     String?
+  status         String
+  createdAt      DateTime     @default(now())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  risks          Risk[]
+  incidents      Incident[]
+
+  @@unique([organizationId, name])
+  @@index([organizationId, status])
+}
+
+model Risk {
+  id             String       @id @default(cuid())
+  organizationId String
+  aiSystemId     String
+  category       String
+  severity       String
+  description    String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  aiSystem       AISystem     @relation(fields: [aiSystemId], references: [id], onDelete: Cascade)
+  controls       Control[]
+
+  @@index([organizationId, aiSystemId])
+  @@index([organizationId, severity])
+}
+
+model Control {
+  id             String       @id @default(cuid())
+  organizationId String
+  riskId         String
+  isoDomainId    String
+  name           String
+  status         String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  risk           Risk         @relation(fields: [riskId], references: [id], onDelete: Cascade)
+  isoDomain      IsoDomain    @relation(fields: [isoDomainId], references: [id], onDelete: Restrict)
+  evidence       Evidence[]
+
+  @@index([organizationId, riskId])
+  @@index([organizationId, isoDomainId])
+}
+
+model Evidence {
+  id             String       @id @default(cuid())
+  organizationId String
+  controlId      String
+  type           String
+  content        String
+  registeredBy   String
+  registeredAt   DateTime     @default(now())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  control        Control      @relation(fields: [controlId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, controlId])
+}
+
+model Incident {
+  id             String       @id @default(cuid())
+  organizationId String
+  aiSystemId     String
+  description    String
+  severity       String
+  occurredAt     DateTime
+  resolvedAt     DateTime?
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  aiSystem       AISystem     @relation(fields: [aiSystemId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, aiSystemId])
+  @@index([organizationId, severity])
+}
+
+model IsoDomain {
+  id             String       @id @default(cuid())
+  organizationId String
+  code           String
+  name           String
+  description    String?
+  sortOrder      Int
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  controls       Control[]
+
+  @@unique([organizationId, code])
+  @@unique([organizationId, sortOrder])
+}

@@ -26,7 +26,8 @@ pregunta que EU AI Act y clientes enterprise ya empiezan a exigir.
 ## 2. Objetivo
 
 Una frase: **Centralizar en un solo sistema el inventario de IA, sus riesgos, controles,
-evidencia e incidentes, con un dashboard de madurez en 12 dominios alineado a ISO/IEC 42001.**
+evidencia e incidentes, con un dashboard de madurez en las 9 áreas de control del Anexo A
+de ISO/IEC 42001 (A.2–A.10).**
 
 Métrica de éxito v0.1: los ~10 sistemas de IA activos de S2A2 quedan registrados en el
 inventario con al menos 1 riesgo, 1 control y 1 evidencia asociada cada uno, y el
@@ -53,8 +54,9 @@ evidencia cargada).
 - US-04: Como admin, puedo adjuntar evidencia (Evidence) a un control — texto, enlace o
   archivo — con fecha y quién la registró.
 - US-05: Como admin, puedo registrar incidentes (Incident) vinculados a un AISystem.
-- US-06: Como admin, veo un dashboard con score de madurez por cada uno de los 12 dominios
-  ISO/IEC 42001, calculado a partir de cobertura real de controles+evidencia (no manual).
+- US-06: Como admin, veo un dashboard con score de madurez por cada una de las 9 áreas de
+  control del Anexo A de ISO/IEC 42001, calculado a partir de cobertura real de
+  controles+evidencia (no manual).
 - US-07: Como admin, veo un listado/detalle de cada AISystem con sus riesgos, controles,
   evidencia e incidentes agregados en una sola vista.
 
@@ -108,7 +110,7 @@ Admin (browser)
 React SPA (Vite) ──REST/JSON──▶ Node.js API (Express) ──Prisma──▶ SQLite (dev) / Postgres (futuro)
    │                                   │
    │                                   ├─ Zod valida request/response
-   │                                   └─ Cálculo de score de madurez (12 dominios ISO 42001)
+   │                                   └─ Cálculo de score de madurez (9 áreas del Anexo A)
    ▼
 Dashboard (Recharts): score por dominio, listado AISystems, detalle con
 riesgos/controles/evidencia/incidentes agregados
@@ -127,7 +129,7 @@ Sin agentes IA ni pipeline asíncrono en v0.1 → no aplica §7-bis (Arquitectur
   `content`, `registeredBy`, `registeredAt`).
 - **Incident** (`id`, `organizationId`, `aiSystemId`, `description`, `severity`,
   `occurredAt`, `resolvedAt`).
-- **IsoDomain** (12 dominios fijos, seed data — catálogo, no editable en v0.1).
+- **IsoDomain** (9 áreas de control A.2–A.10, seed data — catálogo, no editable en v0.1).
 
 Relaciones: AISystem 1—N Risk 1—N Control 1—N Evidence. AISystem 1—N Incident.
 Control N—1 IsoDomain (para el cálculo de score por dominio).
@@ -143,7 +145,7 @@ POST   /api/ai-systems/:id/risks
 POST   /api/risks/:id/controls
 POST   /api/controls/:id/evidence
 POST   /api/ai-systems/:id/incidents
-GET    /api/dashboard/maturity      score 0-100 por cada uno de los 12 dominios ISO 42001
+GET    /api/dashboard/maturity      score 0-100 por cada una de las 9 áreas del Anexo A
 GET    /api/export                  JSON/CSV del inventario completo (Should Have)
 ```
 
@@ -155,18 +157,17 @@ GET    /api/export                  JSON/CSV del inventario completo (Should Hav
 
 ## 11. Dependencias manuales
 
-- Creación del repo GitHub `S2A2-Dynamics/ai-governance` (público) — acción sobre recurso
-  compartido, requiere confirmación explícita del usuario antes de ejecutarse (política
-  CLAUDE.md).
-- Registro del submódulo en `00-active/ai-governance/` dentro del repo padre `s2a2-projects`.
+- Repo GitHub público `S2A2-Dynamics/ai-governance` y submódulo en
+  `00-active/ai-governance/` — completados en T-01 tras confirmación explícita.
 - Carga manual inicial de los ~10 sistemas de IA existentes de S2A2 (no hay importación
   automática en v0.1).
 
 ## 12. Referencias
 
-- Repo: `github.com/S2A2-Dynamics/ai-governance` (pendiente de creación — ver §11).
+- Repo: `github.com/S2A2-Dynamics/ai-governance`.
 - Memoria del proyecto: `memory/projects/ai_governance_framework.md`.
-- Estándar de referencia: ISO/IEC 42001:2023, EU AI Act (Reglamento (UE) 2024/1689).
+- Estándar de referencia: [ISO/IEC 42001:2023](https://www.iso.org/standard/42001.html),
+  EU AI Act (Reglamento (UE) 2024/1689).
 
 ## 13. Consola de admin
 
@@ -181,8 +182,8 @@ No aplica — proyecto interno sin cliente externo en v0.1.
 
 ## 15. Contratos de comportamiento (SDD)
 
-- CG-XX aplicables: pendiente de revisar contra `99-config/CONTRATOS_GLOBALES.md` al
-  iniciar Fase 2 (desglose en tickets).
+- CG-21 aplica a las dependencias de tooling añadidas en T-03: versiones exactas fijadas
+  en los dos `package.json` y sus lockfiles.
 - Contratos específicos del proyecto:
   - SI se calcula el score de madurez de un dominio ISO → ENTONCES se basa únicamente en
     controles con evidencia registrada | NUNCA se muestra un score >0 para un dominio sin

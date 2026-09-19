@@ -9,3 +9,5 @@ dist/
 .playwright-cli/
 backend/prisma/*.db
 backend/prisma/*.db-journal
+backend/prisma/prisma/*.db
+backend/prisma/prisma/*.db-journal

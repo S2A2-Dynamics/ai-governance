@@ -21,9 +21,9 @@ body {
 }
 
 .shell {
-  display: grid;
   min-height: 100vh;
-  place-content: center;
+  max-width: 64rem;
+  margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
@@ -59,4 +59,386 @@ h1 {
   color: #66501f;
   font-size: 0.85rem;
   font-weight: 600;
+}
+
+.panel {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: 1px solid #cdbf9e;
+  border-radius: 12px;
+  background: #fffaf0;
+  text-align: left;
+}
+
+.panel h2 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  color: #66501f;
+}
+
+.table-empty {
+  color: #56606a;
+  font-style: italic;
+}
+
+.ai-systems-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ai-systems-table th,
+.ai-systems-table td {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid #e5ddc8;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.ai-systems-table th {
+  color: #876b2f;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ai-system-name {
+  display: block;
+  font-weight: 600;
+  color: #17202a;
+}
+
+.ai-system-purpose {
+  display: block;
+  color: #56606a;
+  font-size: 0.8rem;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-pill--activo {
+  background: #e3f0e1;
+  color: #2f6b2a;
+}
+
+.status-pill--pausado {
+  background: #f0e3e1;
+  color: #8a3a2f;
+}
+
+.ai-system-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 28rem;
+}
+
+.form-field {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.form-field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #66501f;
+}
+
+.form-field input,
+.form-field select {
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #cdbf9e;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background: #ffffff;
+}
+
+.field-error {
+  color: #a3372c;
+  font-size: 0.75rem;
+}
+
+.form-error {
+  color: #a3372c;
+  font-size: 0.85rem;
+}
+
+.ai-system-form button {
+  justify-self: start;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: #876b2f;
+  color: #fffaf0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ai-system-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ai-system-row {
+  cursor: pointer;
+}
+
+.ai-system-row:hover {
+  background: #f4f1ea;
+}
+
+/* Vista de detalle de AISystem (T-11) */
+
+.ai-system-detail {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.back-link {
+  justify-self: start;
+  background: none;
+  border: none;
+  color: #876b2f;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.detail-header h2 {
+  margin: 0;
+}
+
+.detail-meta {
+  color: #66501f;
+  font-size: 0.85rem;
+}
+
+.risk-card {
+  border: 1px solid #cdbf9e;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: #fffaf0;
+}
+
+.risk-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.risk-category {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #66501f;
+  text-transform: capitalize;
+}
+
+.risk-description {
+  font-size: 0.9rem;
+}
+
+.controls-list {
+  display: grid;
+  gap: 0.75rem;
+  margin-left: 1.25rem;
+}
+
+.control-card {
+  border: 1px solid #cdbf9e;
+  border-radius: 6px;
+  padding: 0.75rem;
+  background: #ffffff;
+}
+
+.control-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.control-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.control-domain {
+  color: #66501f;
+  font-size: 0.8rem;
+}
+
+.evidence-list {
+  list-style: none;
+  margin: 0.5rem 0 0.75rem 1.25rem;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.evidence-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.evidence-type {
+  font-weight: 600;
+  color: #66501f;
+  text-transform: capitalize;
+}
+
+.evidence-content {
+  flex: 1;
+}
+
+.evidence-meta {
+  color: #876b2f;
+  font-size: 0.75rem;
+}
+
+.incident-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.incident-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  border: 1px solid #cdbf9e;
+  border-radius: 6px;
+  padding: 0.6rem 0.75rem;
+  background: #fffaf0;
+}
+
+.incident-description {
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+.incident-dates {
+  color: #66501f;
+  font-size: 0.75rem;
+}
+
+.severity-pill,
+.control-status-pill {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.severity-pill--bajo {
+  background: #e3f0e1;
+  color: #2f6b2a;
+}
+
+.severity-pill--medio {
+  background: #faf3d1;
+  color: #876b2f;
+}
+
+.severity-pill--alto {
+  background: #f5ddc8;
+  color: #a3521a;
+}
+
+.severity-pill--critico {
+  background: #f0e3e1;
+  color: #8a3a2f;
+}
+
+.control-status-pill--planificado {
+  background: #f0e3e1;
+  color: #8a3a2f;
+}
+
+.control-status-pill--implementado {
+  background: #faf3d1;
+  color: #876b2f;
+}
+
+.control-status-pill--verificado {
+  background: #e3f0e1;
+  color: #2f6b2a;
+}
+
+.inline-form {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  align-items: end;
+  border-top: 1px dashed #cdbf9e;
+  padding-top: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.inline-form--compact {
+  margin-left: 1.25rem;
+  margin-top: 0.75rem;
+}
+
+.inline-form-title {
+  grid-column: 1 / -1;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #66501f;
+  margin: 0;
+}
+
+.inline-form button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #876b2f;
+  color: #fffaf0;
+  font-weight: 600;
+  cursor: pointer;
+  height: fit-content;
+}
+
+.inline-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.maturity-legend {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.maturity-swatch {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 2px;
+  margin-right: 0.35rem;
+  vertical-align: middle;
 }

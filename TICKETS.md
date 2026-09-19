@@ -44,61 +44,61 @@
 
 ### T-05 — Endpoints AISystem (US-01)
 **Criterios de aceptación**
-- [ ] `POST /api/ai-systems` valida con Zod, crea con `organizationId` fijo
-- [ ] `GET /api/ai-systems` lista con conteo agregado de riesgos/controles/incidentes
-- [ ] `GET /api/ai-systems/:id` detalle con riesgos→controles→evidencia + incidentes anidado
-- [ ] `PATCH /api/ai-systems/:id`
+- [x] `POST /api/ai-systems` valida con Zod, crea con `organizationId` fijo
+- [x] `GET /api/ai-systems` lista con conteo agregado de riesgos/controles/incidentes
+- [x] `GET /api/ai-systems/:id` detalle con riesgos→controles→evidencia + incidentes anidado
+- [x] `PATCH /api/ai-systems/:id`
 **Estimación**: M
 
 ### T-06 — Endpoints Risk + Control con contrato anti-huérfano (US-02, US-03)
 **Criterios de aceptación**
-- [ ] `POST /api/ai-systems/:id/risks` con categoría/severidad validadas por Zod (enum cerrado)
-- [ ] `POST /api/risks/:id/controls` — **rechaza si no existe el `riskId`** (contrato SDD PRD §15: "NUNCA existe un Control huérfano")
-- [ ] Test que verifica el rechazo 4xx al intentar crear Control sin Risk válido
+- [x] `POST /api/ai-systems/:id/risks` con categoría/severidad validadas por Zod (enum cerrado)
+- [x] `POST /api/risks/:id/controls` — **rechaza si no existe el `riskId`** (contrato SDD PRD §15: "NUNCA existe un Control huérfano")
+- [x] Test que verifica el rechazo 4xx al intentar crear Control sin Risk válido
 **Restricciones**: Skill relevante: `sdd-spec-review`.
 **Estimación**: S
 
 ### T-07 — Endpoints Evidence + Incident (US-04, US-05)
 **Criterios de aceptación**
-- [ ] `POST /api/controls/:id/evidence` con `type` enum (texto/enlace/archivo), `registeredBy`, `registeredAt` automático
-- [ ] `POST /api/ai-systems/:id/incidents` con severidad y fechas ocurrencia/resolución
+- [x] `POST /api/controls/:id/evidence` con `type` enum (texto/enlace/archivo), `registeredBy`, `registeredAt` automático
+- [x] `POST /api/ai-systems/:id/incidents` con severidad y fechas ocurrencia/resolución
 **Estimación**: S
 
 ### T-08 — Cálculo de score de madurez (US-06)
 **Contexto**: contrato SDD más sensible del proyecto — evitar datos inventados (lección
 `bitacora_sesion_previa_puede_contener_datos_inventados`).
 **Criterios de aceptación**
-- [ ] `GET /api/dashboard/maturity` devuelve score 0-100 por cada una de las 9 áreas del Anexo A
-- [ ] Un dominio sin ningún Control con Evidence registrada devuelve **0**, nunca un valor sintético
-- [ ] Fórmula documentada en código (comentario corto) : cobertura = controles-con-evidencia / total-controles-del-dominio
-- [ ] Test unitario: dominio vacío → 0; dominio con 1 control sin evidencia → 0; con evidencia → >0
+- [x] `GET /api/dashboard/maturity` devuelve score 0-100 por cada una de las 9 áreas del Anexo A
+- [x] Un dominio sin ningún Control con Evidence registrada devuelve **0**, nunca un valor sintético
+- [x] Fórmula documentada en código (comentario corto) : cobertura = controles-con-evidencia / total-controles-del-dominio
+- [x] Test unitario: dominio vacío → 0; dominio con 1 control sin evidencia → 0; con evidencia → >0
 **Estimación**: M
 
 ### T-09 — Export JSON/CSV (US-08, Should Have)
 **Criterios de aceptación**
-- [ ] `GET /api/export?format=json|csv` devuelve el inventario completo aplanado
+- [x] `GET /api/export?format=json|csv` devuelve el inventario completo aplanado
 **Estimación**: S
 
 ## Epic: Frontend / Cliente
 
 ### T-10 — Listado + alta de AISystem (US-01, US-07)
 **Criterios de aceptación**
-- [ ] Tabla de AISystems con conteo de riesgos/controles/incidentes (consume T-05)
-- [ ] Formulario de alta (nombre, propósito, provider, gcpProject, status)
+- [x] Tabla de AISystems con conteo de riesgos/controles/incidentes (consume T-05)
+- [x] Formulario de alta (nombre, propósito, provider, gcpProject, status)
 **Restricciones**: Skill relevante: `ux-ui-frontend`.
 **Estimación**: M
 
 ### T-11 — Vista detalle AISystem (US-07)
 **Criterios de aceptación**
-- [ ] Riesgos → Controles → Evidencia anidados en una sola vista
-- [ ] Incidentes listados aparte, ordenados por fecha
-- [ ] Formularios inline para añadir Risk/Control/Evidence/Incident sin salir de la vista
+- [x] Riesgos → Controles → Evidencia anidados en una sola vista
+- [x] Incidentes listados aparte, ordenados por fecha
+- [x] Formularios inline para añadir Risk/Control/Evidence/Incident sin salir de la vista
 **Estimación**: M
 
 ### T-12 — Dashboard de madurez (US-06)
 **Criterios de aceptación**
-- [ ] Recharts: gráfico de las 9 áreas del Anexo A con score 0-100
-- [ ] Dominio en 0 se muestra visualmente distinto a "sin datos" vs "score bajo real" (evitar
+- [x] Recharts: gráfico de las 9 áreas del Anexo A con score 0-100
+- [x] Dominio en 0 se muestra visualmente distinto a "sin datos" vs "score bajo real" (evitar
   que un 0 por falta de evidencia se lea como "cumplimiento pésimo" sin contexto)
 **Estimación**: S
 
@@ -128,18 +128,21 @@ persistir — no inventar campos)**:
   robustez/operación con evidencia real — commits `068c53d`/`01b7abd`), auditoría de
   resiliencia con Firestore delete-protection+PITR (cerrada 15-sep, evidencia verificable)
 **Criterios de aceptación**
-- [ ] AISystem "C21V / Centurion" creado vía API real (no insert directo en SQLite)
-- [ ] Al menos 1 Risk, 1 Control y 1 Evidence asociados, con contenido trazable a una memoria
+- [x] AISystem "C21V / Centurion" creado vía API real (no insert directo en SQLite)
+- [x] Al menos 1 Risk, 1 Control y 1 Evidence asociados, con contenido trazable a una memoria
   o commit real (no texto inventado — contrato de éxito del PRD)
-- [ ] Sirve de humo end-to-end: si esta carga falla, bloquea T-15+ hasta resolver
+- [x] Sirve de humo end-to-end: si esta carga falla, bloquea T-15+ hasta resolver
 **Estimación**: S
 
 ### T-15 — Carga del resto de sistemas de IA (~9 restantes)
 **Contexto**: Zomy, CRMWhapi, Jucar Supremo, Whapi, Whapi-Dashboard, whapi-digest, MIOS,
 signal-radar, whapi-lead-engine — todos con componente Gemini/Vertex AI según CLAUDE.md.
 **Criterios de aceptación**
-- [ ] Cada sistema con al menos 1 riesgo, 1 control, 1 evidencia (métrica de éxito PRD §2)
-- [ ] Datos verificados contra memoria de cada proyecto antes de persistir, no inventados
+- [x] Cada sistema con al menos 1 riesgo, 1 control, 1 evidencia (métrica de éxito PRD §2)
+- [x] Datos verificados contra memoria de cada proyecto antes de persistir, no inventados
+  (excepción documentada: whapi-lead-engine no tiene memoria dedicada — se cargó con el
+  mínimo verificable de CLAUDE.md y purpose/gcpProject marcados explícitamente como no
+  verificados, sin inventar detalle; ver BITACORA-2026-09.md)
 **Estimación**: L (repetitivo, un ticket por sistema si se prefiere trocear en ejecución)
 
 ## Tickets obligatorios GCP — no aplican en v0.1

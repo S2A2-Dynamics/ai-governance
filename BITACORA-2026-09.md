@@ -255,7 +255,9 @@ PRD §11, motivado por la lección `bitacora_sesion_previa_puede_contener_datos_
   si subirlo al repo (política de no commitear sin pedido expreso).
 
 ### Pendiente / Próximos pasos
-- [ ] Confirmar con el usuario si `docs/MANUAL_USO.html` se sube al repo.
+- [x] Usuario confirmó ("sí, commit") — `docs/MANUAL_USO.html` subido al repo
+      (commit `ff6f8db`) y puntero de submódulo actualizado en el repo padre
+      (commit `2579e53`).
 
 ## T-15 — Carga del resto de sistemas de IA (19-sep-2026)
 

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Uso — AI Governance Framework</title>
+<style>
+  :root {
+    --blue: #2563eb;
+    --gray-bg: #f8fafc;
+    --gray-border: #e2e8f0;
+    --text: #1e293b;
+    --muted: #64748b;
+    --green: #16a34a;
+    --amber: #d97706;
+    --red: #dc2626;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    color: var(--text);
+    line-height: 1.6;
+    background: #fff;
+  }
+  header.hero {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+  }
+  header.hero h1 { margin: 0 0 0.5rem; font-size: 1.9rem; }
+  header.hero p { margin: 0; opacity: 0.9; }
+  nav.toc {
+    background: var(--gray-bg);
+    border: 1px solid var(--gray-border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  nav.toc h2 { margin-top: 0; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  nav.toc ol { margin: 0; padding-left: 1.25rem; columns: 2; }
+  nav.toc li { margin-bottom: 0.4rem; }
+  nav.toc a { color: var(--blue); text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+  section { margin-bottom: 3rem; scroll-margin-top: 1rem; }
+  h2 {
+    font-size: 1.4rem;
+    border-bottom: 2px solid var(--gray-border);
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+  }
+  h3 { font-size: 1.1rem; color: #1e3a8a; margin-top: 1.75rem; }
+  code, .kbd {
+    background: #eef2ff;
+    color: #3730a3;
+    padding: 0.1em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--gray-border);
+    padding: 0.55rem 0.75rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: var(--gray-bg); font-weight: 600; }
+  tr:nth-child(even) td { background: #fafbfc; }
+  .callout {
+    border-left: 4px solid var(--blue);
+    background: #eff6ff;
+    padding: 0.85rem 1.1rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1rem 0;
+  }
+  .callout.warn { border-color: var(--amber); background: #fffbeb; }
+  .callout.ok { border-color: var(--green); background: #f0fdf4; }
+  .pill {
+    display: inline-block;
+    padding: 0.15em 0.6em;
+    border-radius: 999px;
+    font-size: 0.8em;
+    font-weight: 600;
+    color: #fff;
+  }
+  .pill.activo { background: var(--green); }
+  .pill.pausado { background: var(--muted); }
+  .pill.bajo { background: #60a5fa; }
+  .pill.medio { background: var(--amber); }
+  .pill.alto { background: #f97316; }
+  .pill.critico { background: var(--red); }
+  .step-list { padding-left: 1.4rem; }
+  .step-list li { margin-bottom: 0.6rem; }
+  .field-table td:first-child { font-weight: 600; white-space: nowrap; }
+  .btn-sample {
+    display: inline-block;
+    background: var(--blue);
+    color: #fff;
+    padding: 0.35em 0.9em;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 500;
+  }
+  .legend-swatch {
+    display: inline-block;
+    width: 12px; height: 12px;
+    border-radius: 3px;
+    margin-right: 0.4em;
+    vertical-align: middle;
+  }
+  footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gray-border);
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  .print-btn {
+    position: fixed;
+    top: 1.2rem;
+    right: 1.2rem;
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    padding: 0.6em 1.1em;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .print-btn:hover { background: #1d4ed8; }
+  @media print {
+    .print-btn, nav.toc { display: none; }
+    header.hero { background: #1e3a8a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+  @media (max-width: 700px) {
+    nav.toc ol { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+
+<header class="hero">
+  <h1>AI Governance Framework</h1>
+  <p>Manual de uso — inventario, riesgos, controles, evidencia e incidentes de sistemas de IA según ISO/IEC 42001</p>
+</header>
+
+<nav class="toc">
+  <h2>Contenido</h2>
+  <ol>
+    <li><a href="#acceso">Acceso a la aplicación</a></li>
+    <li><a href="#inventario">Inventario de sistemas de IA</a></li>
+    <li><a href="#alta">Registrar un nuevo sistema de IA</a></li>
+    <li><a href="#detalle">Vista de detalle de un sistema</a></li>
+    <li><a href="#riesgos">Registrar un riesgo</a></li>
+    <li><a href="#controles">Registrar un control</a></li>
+    <li><a href="#evidencia">Registrar evidencia</a></li>
+    <li><a href="#incidentes">Registrar un incidente</a></li>
+    <li><a href="#filtros">Filtros de severidad y dominio</a></li>
+    <li><a href="#dashboard">Dashboard de madurez</a></li>
+    <li><a href="#export">Exportar el inventario</a></li>
+    <li><a href="#glosario">Glosario de estados</a></li>
+  </ol>
+</nav>
+
+<section id="acceso">
+  <h2>1. Acceso a la aplicación</h2>
+  <p>La aplicación se ejecuta localmente en dos servicios independientes:</p>
+  <table>
+    <tr><th>Servicio</th><th>URL</th><th>Función</th></tr>
+    <tr><td>Frontend</td><td><code>http://localhost:5173</code></td><td>Interfaz web que usas para navegar y registrar datos</td></tr>
+    <tr><td>Backend / API</td><td><code>http://localhost:3000</code></td><td>API REST (Express + Prisma/SQLite); <code>/health</code> para verificar que está activo</td></tr>
+  </table>
+  <div class="callout">
+    Abre <code>http://localhost:5173</code> en el navegador. Si no carga, verifica que ambos procesos (<code>npm run dev</code> en <code>backend/</code> y en <code>frontend/</code>) estén corriendo — ver <code>README.md</code> del proyecto para instrucciones de arranque.
+  </div>
+</section>
+
+<section id="inventario">
+  <h2>2. Inventario de sistemas de IA</h2>
+  <p>La pantalla principal muestra una tabla con todos los sistemas de IA registrados en la organización:</p>
+  <table>
+    <tr><th>Columna</th><th>Contenido</th></tr>
+    <tr><td>Nombre</td><td>Nombre del sistema y, debajo, su propósito</td></tr>
+    <tr><td>Provider</td><td>Proveedor del modelo/motor de IA (ej. Gemini, Vertex AI)</td></tr>
+    <tr><td>GCP Project</td><td>ID del proyecto GCP asociado, o <code>—</code> si no aplica</td></tr>
+    <tr><td>Estado</td><td>Pill <span class="pill activo">activo</span> / <span class="pill pausado">pausado</span></td></tr>
+    <tr><td>Riesgos</td><td>Número total de riesgos registrados</td></tr>
+    <tr><td>Controles</td><td>Número total de controles registrados</td></tr>
+    <tr><td>Incidentes</td><td>Número total de incidentes registrados</td></tr>
+  </table>
+  <p>Haz clic en cualquier fila para abrir la <a href="#detalle">vista de detalle</a> de ese sistema.</p>
+  <p>Si todavía no hay ningún sistema registrado, la tabla muestra el mensaje <em>"Todavía no hay sistemas de IA registrados."</em></p>
+</section>
+
+<section id="alta">
+  <h2>3. Registrar un nuevo sistema de IA</h2>
+  <p>El formulario de alta está disponible junto al inventario. Campos:</p>
+  <table class="field-table">
+    <tr><td>Nombre</td><td>Obligatorio. Nombre identificativo del sistema.</td></tr>
+    <tr><td>Propósito</td><td>Obligatorio. Descripción breve de para qué se usa el sistema.</td></tr>
+    <tr><td>Provider</td><td>Obligatorio. Proveedor del modelo de IA (ej. "Gemini (Vertex AI)").</td></tr>
+    <tr><td>GCP Project (opcional)</td><td>ID del proyecto GCP, si aplica.</td></tr>
+    <tr><td>Estado</td><td>Selector: <em>Activo</em> o <em>Pausado</em>. Por defecto: Activo.</td></tr>
+  </table>
+  <p>Al enviar el formulario, el botón <span class="btn-sample">Añadir sistema de IA</span> cambia a <em>"Creando…"</em> mientras se procesa y se deshabilita para evitar envíos duplicados. Si algún campo obligatorio falla la validación del servidor, el error aparece debajo del campo correspondiente. Al crearse correctamente, el sistema aparece de inmediato en el inventario y el formulario se limpia.</p>
+</section>
+
+<section id="detalle">
+  <h2>4. Vista de detalle de un sistema</h2>
+  <p>Al hacer clic en una fila del inventario se abre la vista de detalle, que muestra:</p>
+  <ul class="step-list">
+    <li>Un botón <strong>"← Volver al inventario"</strong> en la parte superior para regresar a la tabla.</li>
+    <li>El nombre del sistema junto a su pill de estado.</li>
+    <li>El propósito registrado.</li>
+    <li>Una línea con <strong>Provider</strong> y <strong>GCP Project</strong> (este último muestra <code>—</code> si no fue registrado).</li>
+    <li>La sección de <strong>Riesgos</strong>, con sus Controles y Evidencia anidados.</li>
+    <li>Un panel separado de <strong>Incidentes</strong>.</li>
+  </ul>
+  <div class="callout ok">
+    Cada vez que se registra un riesgo, control, evidencia o incidente nuevo, la vista completa se refresca automáticamente — no es necesario recargar la página ni salir del detalle para ver el cambio reflejado.
+  </div>
+  <p>Estructura jerárquica de la sección de riesgos:</p>
+  <p style="font-family: monospace; background: var(--gray-bg); padding: 1rem; border-radius: 8px;">
+    Riesgo (categoría, severidad, descripción)<br>
+    &nbsp;&nbsp;└─ Control (nombre, estado, dominio ISO)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ Evidencia (tipo, contenido, registrado por, fecha)
+  </p>
+  <p>Si el sistema no tiene ningún riesgo registrado todavía, se muestra el mensaje <em>"Todavía no hay riesgos registrados."</em></p>
+</section>
+
+<section id="riesgos">
+  <h2>5. Registrar un riesgo</h2>
+  <p>Dentro del detalle de un sistema, el formulario <strong>"Añadir riesgo"</strong> tiene estos campos:</p>
+  <table class="field-table">
+    <tr><td>Categoría</td><td>Selector: sesgo, privacidad, seguridad, transparencia, robustez, otro. Por defecto: <em>otro</em>.</td></tr>
+    <tr><td>Severidad</td><td>Selector: <span class="pill bajo">bajo</span> <span class="pill medio">medio</span> <span class="pill alto">alto</span> <span class="pill critico">critico</span>. Por defecto: <em>bajo</em>.</td></tr>
+    <tr><td>Descripción</td><td>Obligatorio. Texto libre describiendo el riesgo.</td></tr>
+  </table>
+  <p>Botón: <span class="btn-sample">Añadir riesgo</span> (cambia a "Creando…" mientras se procesa). El nuevo riesgo aparece de inmediato como una tarjeta nueva en la lista.</p>
+</section>
+
+<section id="controles">
+  <h2>6. Registrar un control</h2>
+  <p>Dentro de cada tarjeta de riesgo hay un formulario <strong>"Añadir control"</strong>:</p>
+  <table class="field-table">
+    <tr><td>Nombre</td><td>Obligatorio.</td></tr>
+    <tr><td>Estado</td><td>Selector: planificado, implementado, verificado. Por defecto: <em>planificado</em>.</td></tr>
+    <tr><td>Dominio ISO</td><td>Selector cargado dinámicamente con los 9 dominios del Anexo A de ISO/IEC 42001 (formato "{código} — {nombre}"). Si no se elige ninguno, toma el primero disponible por defecto.</td></tr>
+  </table>
+  <p>Botón: <span class="btn-sample">Añadir control</span> ("Creando…" mientras se procesa). Se deshabilita si todavía no hay dominios ISO cargados.</p>
+  <div class="callout warn">
+    <strong>Regla anti-huérfano:</strong> el sistema no permite crear un control asociado a un dominio ISO que no exista. Si ocurre este error, se muestra debajo del selector de dominio.
+  </div>
+</section>
+
+<section id="evidencia">
+  <h2>7. Registrar evidencia</h2>
+  <p>Dentro de cada tarjeta de control hay un formulario <strong>"Añadir evidencia"</strong>:</p>
+  <table class="field-table">
+    <tr><td>Tipo</td><td>Selector: texto, enlace, archivo. Por defecto: <em>texto</em>.</td></tr>
+    <tr><td>Contenido</td><td>Obligatorio. El texto, URL o referencia de la evidencia.</td></tr>
+    <tr><td>Registrado por</td><td>Obligatorio. Nombre de quien registra la evidencia.</td></tr>
+  </table>
+  <p>Botón: <span class="btn-sample">Añadir evidencia</span> ("Guardando…" mientras se procesa). Cada evidencia se muestra con su tipo, contenido y la línea "{registrado por} · {fecha}".</p>
+  <div class="callout">
+    Registrar evidencia en un control es lo que hace que ese dominio ISO sume puntos en el <a href="#dashboard">dashboard de madurez</a> — un control sin evidencia no cuenta para el score.
+  </div>
+</section>
+
+<section id="incidentes">
+  <h2>8. Registrar un incidente</h2>
+  <p>El panel <strong>"Incidentes"</strong>, separado de la lista de riesgos, tiene su propio formulario:</p>
+  <table class="field-table">
+    <tr><td>Descripción</td><td>Obligatorio.</td></tr>
+    <tr><td>Severidad</td><td>Selector, mismas 4 opciones que en riesgos. Por defecto: <em>bajo</em>.</td></tr>
+    <tr><td>Fecha de ocurrencia</td><td>Obligatorio. Selector de fecha.</td></tr>
+    <tr><td>Fecha de resolución</td><td>Opcional. Selector de fecha — dejar vacío si el incidente sigue abierto.</td></tr>
+  </table>
+  <p>Botón: <span class="btn-sample">Añadir incidente</span> ("Guardando…" mientras se procesa). Cada incidente muestra su pill de severidad, la descripción, "Ocurrido: {fecha}" y, si aplica, "· Resuelto: {fecha}".</p>
+  <p>Si no hay incidentes registrados, se muestra <em>"No se han registrado incidentes."</em></p>
+</section>
+
+<section id="filtros">
+  <h2>9. Filtros de severidad y dominio</h2>
+  <p>En la vista de detalle, dos selectores permiten acotar lo que se muestra:</p>
+  <table>
+    <tr><th>Filtro</th><th>Opciones</th><th>Efecto</th></tr>
+    <tr><td>Severidad</td><td>"Todas" + bajo/medio/alto/critico</td><td>Muestra solo las tarjetas de Riesgo con esa severidad</td></tr>
+    <tr><td>Dominio ISO</td><td>"Todos" + los 9 dominios ("{código} — {nombre}")</td><td>Dentro de cada riesgo visible, muestra solo los Controles de ese dominio</td></tr>
+  </table>
+  <p>Ambos filtros se pueden combinar y se aplican de forma independiente. Mensajes cuando no hay coincidencias:</p>
+  <ul class="step-list">
+    <li><em>"Ningún riesgo coincide con los filtros seleccionados."</em> — el filtro de severidad deja la lista de riesgos en cero.</li>
+    <li><em>"Ningún control coincide con el dominio seleccionado."</em> — un riesgo visible no tiene controles del dominio elegido.</li>
+  </ul>
+</section>
+
+<section id="dashboard">
+  <h2>10. Dashboard de madurez</h2>
+  <p>Muestra un gráfico de barras con el score de madurez (0–100%) de cada uno de los 9 dominios del Anexo A de ISO/IEC 42001.</p>
+  <div class="callout">
+    <strong>Fórmula:</strong> cobertura = controles con evidencia registrada ÷ total de controles del dominio.
+  </div>
+  <p>El dashboard distingue visualmente dos situaciones que, con un score de 0%, serían indistinguibles:</p>
+  <table>
+    <tr><th>Color</th><th>Significado</th></tr>
+    <tr><td><span class="legend-swatch" style="background:#2563eb;"></span> Azul</td><td><strong>Score calculado</strong> — el dominio tiene al menos un control registrado; la barra refleja el % real de cobertura con evidencia.</td></tr>
+    <tr><td><span class="legend-swatch" style="background:#d1d5db;"></span> Gris</td><td><strong>Sin datos</strong> — el dominio todavía no tiene ningún control registrado. La barra se muestra con una altura mínima simbólica y el tooltip indica "Sin datos" en lugar de un porcentaje, para no confundirse con un 0% de cumplimiento real.</td></tr>
+  </table>
+  <p>Al pasar el cursor sobre una barra aparece el nombre del dominio y, si tiene datos, el porcentaje exacto.</p>
+</section>
+
+<section id="export">
+  <h2>11. Exportar el inventario</h2>
+  <p>La API expone un endpoint de exportación con el inventario completo aplanado:</p>
+  <p><code>GET http://localhost:3000/api/export?format=json</code> — o <code>format=csv</code></p>
+  <div class="callout">
+    Actualmente el export se consume directamente desde la API (por ejemplo, pegando la URL en el navegador o vía <code>curl</code>); no hay un botón dedicado en la interfaz de usuario en esta versión.
+  </div>
+</section>
+
+<section id="glosario">
+  <h2>12. Glosario de estados</h2>
+  <table>
+    <tr><th>Entidad</th><th>Estados posibles</th></tr>
+    <tr><td>Sistema de IA</td><td><span class="pill activo">activo</span> <span class="pill pausado">pausado</span></td></tr>
+    <tr><td>Severidad (Riesgo/Incidente)</td><td><span class="pill bajo">bajo</span> <span class="pill medio">medio</span> <span class="pill alto">alto</span> <span class="pill critico">critico</span></td></tr>
+    <tr><td>Categoría de riesgo</td><td>sesgo, privacidad, seguridad, transparencia, robustez, otro</td></tr>
+    <tr><td>Estado de control</td><td>planificado, implementado, verificado</td></tr>
+    <tr><td>Tipo de evidencia</td><td>texto, enlace, archivo</td></tr>
+  </table>
+</section>
+
+<footer>
+  AI Governance Framework · Manual de uso v1 · Generado a partir del código real de la aplicación (frontend + API)
+</footer>
+
+</body>
+</html>

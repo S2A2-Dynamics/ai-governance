@@ -11,3 +11,5 @@ Ver también `docs/ROADMAP.md` (diseño conceptual de mayor alcance, ej. TokenPu
 - (18-sep-2026) Exportación de informe de auditoría en PDF para EU AI Act. Estado: backlog.
 - (18-sep-2026) Ingesta semi-automática del inventario inicial desde BITACORA/memorias de
   cada proyecto S2A2, con validación humana antes de persistir. Estado: backlog.
+- ✅ (21-sep-2026) Manual de usuario HTML descargable (`docs/MANUAL_USO.html`) creado y
+  verificado manualmente T-11/T-13 vía Playwright. Sin bugs encontrados.

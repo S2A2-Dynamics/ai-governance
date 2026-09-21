@@ -238,6 +238,25 @@ PRD §11, motivado por la lección `bitacora_sesion_previa_puede_contener_datos_
 - [x] T-15: cargar los ~9 sistemas de IA restantes — **CERRADO 19-sep-2026**, ver sección
   siguiente.
 
+## 2026-09-21 — Manual de usuario HTML + verificación T-11/T-13
+
+**Estado al inicio**: T-01 a T-15 ya cerrados y pusheados; app corriendo local (backend :3000, frontend :5173).
+
+### Qué se hizo
+- Verificación manual con Playwright de T-11 (detalle AISystem: riesgos→controles→evidencia
+  anidados, incidentes por fecha, formularios inline, botón volver) y T-13 (filtros por
+  severidad/dominio, combinados y reseteados) — sin errores de consola ni bugs encontrados.
+- Creado `docs/MANUAL_USO.html`: manual de usuario autocontenido (sin dependencias externas),
+  descargable, sourced solo de componentes reales verificados (AISystemForm, AISystemDetail,
+  AISystemTable, MaturityDashboard) y de TICKETS.md — sin inventar UI/comportamiento.
+
+### Decisiones tomadas
+- **Manual HTML sin commitear todavía**: pendiente confirmación explícita del usuario sobre
+  si subirlo al repo (política de no commitear sin pedido expreso).
+
+### Pendiente / Próximos pasos
+- [ ] Confirmar con el usuario si `docs/MANUAL_USO.html` se sube al repo.
+
 ## T-15 — Carga del resto de sistemas de IA (19-sep-2026)
 
 Los 9 sistemas se cargaron uno a uno vía API real (`POST /api/ai-systems` →

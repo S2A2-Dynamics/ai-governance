@@ -13,3 +13,7 @@ Ver también `docs/ROADMAP.md` (diseño conceptual de mayor alcance, ej. TokenPu
   cada proyecto S2A2, con validación humana antes de persistir. Estado: backlog.
 - ✅ (21-sep-2026) Manual de usuario HTML descargable (`docs/MANUAL_USO.html`) creado y
   verificado manualmente T-11/T-13 vía Playwright. Sin bugs encontrados.
+
+### 💡 PATCH de Risk/Control para re-importar fichas RGPD
+- **Estado**: 💡 Nueva (2026-10-08)
+- **Descripción**: `import-ficha-rgpd.ts` es idempotente pero no actualiza riesgos existentes; al corregir un hallazgo (Jucar C4) hubo que cambiar el control con sqlite. Añadir PATCH en la API y que el importador actualice estado/descripción por prefijo `[RGPD Cn]`.

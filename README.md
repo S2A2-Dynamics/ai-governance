@@ -54,3 +54,18 @@ npm run db:seed
 cd backend && npm run lint && npm run typecheck
 cd frontend && npm run lint && npm run typecheck && npm run build
 ```
+
+## Importar fichas RGPD de agentes
+
+Cada proyecto S2A2 con LLM tiene una «Ficha RGPD del agente» (skill `99-config/skills/rgpd-agentes`)
+en `docs/ficha-rgpd.json`. Con la API arrancada:
+
+```bash
+cd backend
+npx tsx scripts/import-ficha-rgpd.ts ../../CRMWhapi/docs/ficha-rgpd.json --dry-run   # valida, no escribe
+npx tsx scripts/import-ficha-rgpd.ts ../../CRMWhapi/docs/ficha-rgpd.json             # importa
+```
+
+Cada comprobación se convierte en Risk + Control (dominio ISO 42001 del Anexo A). Solo las que
+cumplen (`pass`) llevan Evidence, así que el dashboard de madurez no se infla con hallazgos.
+Re-importar no duplica, pero tampoco actualiza riesgos existentes (la API v0.1 no tiene PATCH).

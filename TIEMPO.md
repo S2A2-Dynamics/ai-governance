@@ -33,3 +33,9 @@ Registro de metricas reales de desarrollo. Actualizar al cerrar cada sesion.
 - **Tareas**: verificación Playwright T-11/T-13, redacción `docs/MANUAL_USO.html`
 - **Bloqueos**: ninguno
 - **Ratio util**: ~95%
+
+## 2026-10-06/08 — Importador de fichas RGPD + carga de 8 sistemas
+- **Claude**: ~40 min · **Humano**: ~2 min · **Total**: ~42 min
+- **Tareas**: módulo `fichaRgpd.ts` + CLI + 3 tests; validación de 8 fichas; import en dev.db (101 riesgos); C4 Jucar a verificado
+- **Bloqueos**: sistemas ya inventariados con otros nombres → se alinearon los `system.name` de las fichas antes de importar
+- **Ratio útil**: ~90%

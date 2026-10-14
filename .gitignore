@@ -11,3 +11,6 @@ backend/prisma/*.db
 backend/prisma/*.db-journal
 backend/prisma/prisma/*.db
 backend/prisma/prisma/*.db-journal
+
+# Evidencias locales de las olas de QA (no versionar)
+quality/

@@ -39,3 +39,9 @@ Registro de metricas reales de desarrollo. Actualizar al cerrar cada sesion.
 - **Tareas**: módulo `fichaRgpd.ts` + CLI + 3 tests; validación de 8 fichas; import en dev.db (101 riesgos); C4 Jucar a verificado
 - **Bloqueos**: sistemas ya inventariados con otros nombres → se alinearon los `system.name` de las fichas antes de importar
 - **Ratio útil**: ~90%
+
+## 2026-11-08 — Módulo de Transparencia UE AI Act (Art. 50) + Ingesta y Exportación Print-Ready
+- **Claude**: ~50 min · **Humano**: ~5 min · **Total**: ~55 min
+- **Tareas**: Esquema Zod `aiAct.ts`, importador REST `fichaAiAct.ts` con 3 tests (11/11 suite pass), generador documental `aiActDocument.ts` (HTML print-ready + Markdown), CLI `import-ficha-ai-act.ts`, generación de 4 fichas oficiales (KlientIQ, Trelivo, S2A2Bot, Centurion), ingesta en SQLite `dev.db` y Skill #125 (`ai-act-transparency`).
+- **Bloqueos**: ninguno · **Ratio útil**: ~95%
+

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>PRD — S2A2 AI Governance</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --gold: #c9a84c;
+      --gold-light: #fef08a;
+      --accent: #38bdf8;
+      --success: #4ade80;
+      --warning: #facc15;
+      --danger: #f87171;
+      --tag-bg: rgba(201, 168, 76, 0.12);
+      --code-bg: #0b1120;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --surface-border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --gold: #b45309;
+        --gold-light: #fef3c7;
+        --accent: #0284c7;
+        --success: #16a34a;
+        --warning: #ca8a04;
+        --danger: #dc2626;
+        --tag-bg: rgba(180, 83, 9, 0.1);
+        --code-bg: #f1f5f9;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 0 0 60px 0;
+    }
+    .header {
+      background: linear-gradient(135deg, #090d16 0%, #1e293b 100%);
+      border-bottom: 2px solid var(--gold);
+      padding: 40px 24px;
+      color: #fff;
+    }
+    .header-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    .subtitle {
+      color: #94a3b8;
+      font-size: 16px;
+      max-width: 800px;
+      margin-bottom: 20px;
+    }
+    .meta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .pill {
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+    }
+    .pill.gold {
+      background: rgba(201, 168, 76, 0.2);
+      border-color: var(--gold);
+      color: #fef08a;
+    }
+    .pill.green {
+      background: rgba(74, 222, 128, 0.15);
+      border-color: var(--success);
+      color: #86efac;
+    }
+
+    .nav-bar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--surface-border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .nav-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      gap: 8px;
+      padding: 10px 24px;
+    }
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .nav-link:hover {
+      color: var(--text);
+      background: rgba(201, 168, 76, 0.1);
+    }
+    .nav-link.active {
+      color: var(--gold);
+      background: var(--tag-bg);
+      border-bottom: 2px solid var(--gold);
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 32px auto 0 auto;
+      padding: 0 24px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--surface-border);
+      padding-bottom: 8px;
+    }
+    h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold);
+      margin: 16px 0 8px 0;
+    }
+    p {
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    ul, ol {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+    .badge.done {
+      background: rgba(74, 222, 128, 0.2);
+      color: var(--success);
+      border: 1px solid var(--success);
+    }
+    .badge.dev {
+      background: rgba(250, 204, 21, 0.2);
+      color: var(--warning);
+      border: 1px solid var(--warning);
+    }
+
+    /* User Stories Cards */
+    .us-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .us-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-left: 4px solid var(--gold);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .us-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .us-id {
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--gold);
+      background: var(--tag-bg);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .story-formula {
+      background: var(--code-bg);
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      font-size: 14px;
+    }
+    .story-formula span.kw {
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .criteria {
+      font-size: 13px;
+      color: var(--text-muted);
+      border-top: 1px dashed var(--surface-border);
+      padding-top: 10px;
+    }
+
+    /* Diagrams */
+    .diagram-container {
+      background: #0b1120;
+      border: 1px solid var(--surface-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 20px 0;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+    th, td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--surface-border);
+    }
+    th {
+      background: var(--tag-bg);
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .footer {
+      margin-top: 60px;
+      padding: 24px;
+      border-top: 1px solid var(--surface-border);
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+  </style>
+
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="eyebrow">S2A2 Dynamics · Especificación Oficial</div>
+      <h1>S2A2 AI Governance</h1>
+      <p class="subtitle">Aplicación interna para inventariar sistemas de IA, sus riesgos, controles, evidencias e incidentes (alineada a EU AI Act).</p>
+      <div class="meta-pills">
+        <span class="pill gold">10-archive · Gobernanza IA</span><span class="pill warn">Archivado / Local</span><span class="pill ">Stack: React 19 · Vite 8 · Express 5 · Prisma 6 · SQLite</span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav-bar">
+    <div class="nav-inner">
+      <a href="PRD.html" class="nav-link active">📄 PRD Ejecutivo</a>
+      <a href="USER_STORIES.html" class="nav-link">🎯 User Stories (1)</a>
+      <a href="ARQUITECTURA.html" class="nav-link">🏛️ Arquitectura & Diagramas</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    
+    <section class="card" style="border-color: var(--gold);">
+      <div class="card-header">
+        <h2 class="card-title">💡 Elevator Pitch (Sin jerga técnica)</h2>
+        <span class="badge done">Propuesta de Valor</span>
+      </div>
+      <p style="font-size: 16px; line-height: 1.7; margin: 0;">Con la llegada de la normativa europea de inteligencia artificial, ninguna empresa sabe exactamente qué modelos usa ni qué riesgos asume. AI Governance es el inventario vivo donde registras cada sistema de IA, sus controles y sus evidencias de cumplimiento para pasar cualquier auditoría.</p>
+    </section>
+        
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">0. Contexto de Negocio y ROI</h2>
+        <span class="badge done">Alineado a Negocio</span>
+      </div>
+      <p><strong>Propósito</strong>: Aplicación interna para inventariar sistemas de IA, sus riesgos, controles, evidencias e incidentes (alineada a EU AI Act).</p>
+      <p><strong>Problema a Resolver</strong>: Necesidad específica de negocio o exploración técnica documentada para evitar pérdida de conocimiento.</p>
+      <div style="background: var(--tag-bg); border-left: 4px solid var(--gold); padding: 16px; border-radius: 6px; margin: 16px 0;">
+        <h3 style="margin-top: 0; color: var(--gold);">Tesis de Retorno de Inversión (ROI) & FinOps</h3>
+        <p>Activo reutilizable o aprendizaje validado que acelera futuros desarrollos S2A2 sin partir de cero.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>1. Requerimientos Funcionales Nucleares</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Requerimiento</th>
+            <th>Detalle Técnico / Contrato</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td><strong>RF-01</strong></td>
+            <td>Alcance Principal</td>
+            <td>Aplicación interna para inventariar sistemas de IA, sus riesgos, controles, evidencias e incidentes (alineada a EU AI Act).</td>
+            <td><span class="badge done">Archivado / Local</span></td>
+          </tr>
+        
+          <tr>
+            <td><strong>RF-02</strong></td>
+            <td>Trazabilidad e Integración</td>
+            <td>API REST Express (/api/*: sistemas, riesgos, controles, evidencias, /dashboard/maturity, /export, /health). Sin despliegue cloud activo (app local).</td>
+            <td><span class="badge done">Auditado</span></td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>2. Parámetros FinOps & Escalabilidad Cloud</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 16px 0;">
+        
+          <div style="background: var(--code-bg); padding: 16px; border-radius: 8px; border: 1px solid var(--surface-border);">
+            <div style="font-size: 11px; color: var(--gold); text-transform: uppercase;">Estado Operativo</div>
+            <div style="font-size: 22px; font-weight: 800;">Archivado / Local</div>
+            <div style="font-size: 12px; color: var(--text-muted);">10-archive · Gobernanza IA</div>
+          </div>
+        
+          <div style="background: var(--code-bg); padding: 16px; border-radius: 8px; border: 1px solid var(--surface-border);">
+            <div style="font-size: 11px; color: var(--gold); text-transform: uppercase;">Tecnología</div>
+            <div style="font-size: 22px; font-weight: 800;">React 19 · Vite 8 · Express 5 · Prisma 6 · SQLite</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Verificado en repositorio local.</div>
+          </div>
+        
+      </div>
+      <p>Auditado contra código fuente y GCP el 2026-11-24.</p>
+    </section>
+    
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">3. Capacidad de Integración & APIs</h2>
+        <span class="badge done">Auditado en Código</span>
+      </div>
+      <p>API REST Express (/api/*: sistemas, riesgos, controles, evidencias, /dashboard/maturity, /export, /health). Sin despliegue cloud activo (app local).</p>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Mecanismo</th>
+            <th>Endpoint / Canal / Interfaz</th>
+            <th>Autenticación</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td><strong>REST API Local</strong></td>
+            <td><code>GET/POST /api/* · /api/dashboard/maturity · /api/export · /api/health</code></td>
+            <td>Local / Interno</td>
+            <td>Gestión de inventario, riesgos, controles y exportación.</td>
+          </tr>
+        
+        </tbody>
+      </table>
+        
+    </section>
+        
+  </main>
+
+  <footer class="footer">
+    S2A2 Dynamics · Ecosistema Cloud & Soluciones de Inteligencia Artificial · Madrid, 2026
+  </footer>
+</body>
+</html>

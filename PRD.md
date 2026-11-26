@@ -194,3 +194,19 @@ No aplica — proyecto interno sin cliente externo en v0.1.
   - SI se migra el datasource de Prisma a Postgres → ENTONCES solo cambia `provider` y
     `url` en `schema.prisma` | NUNCA se usan tipos/features nativos de un solo motor
     (`@db.*` de un proveedor, arrays nativos de Postgres) en el schema v0.1.
+
+---
+
+## 💡 Elevator Pitch (Sin jerga técnica)
+
+Con la llegada de la normativa europea de inteligencia artificial, ninguna empresa sabe exactamente qué modelos usa ni qué riesgos asume. AI Governance es el inventario vivo donde registras cada sistema de IA, sus controles y sus evidencias de cumplimiento para pasar cualquier auditoría.
+
+---
+
+## Capacidad de Integración & APIs (Auditado 2026-11-24)
+
+API REST Express (/api/*: sistemas, riesgos, controles, evidencias, /dashboard/maturity, /export, /health). Sin despliegue cloud activo (app local).
+
+| Mecanismo | Endpoint / Canal / Interfaz | Autenticación | Descripción |
+|-----------|-----------------------------|---------------|-------------|
+| REST API Local | `GET/POST /api/* · /api/dashboard/maturity · /api/export · /api/health` | Local / Interno | Gestión de inventario, riesgos, controles y exportación. |
